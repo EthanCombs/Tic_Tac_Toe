@@ -1,0 +1,11 @@
+button {
+    height: 40px;
+    width: 40px;
+    background-color: azure;
+    border: 1px solid black;
+}
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 40px);
+    font-size: 0px;
+}
