@@ -1,7 +1,10 @@
 var player1Turn = true;
 var isOver = false;
-var draw
+var draw = false;
 const h3 = document.querySelector(`h3`);
+const buttons = document.getElementsByTagName(`button`);
+const p1Win = document.getElementById(`p1Win`);
+const p2Win = document.getElementById(`p2Win`);
 if (player1Turn) 
 function check(btn)
 {
@@ -24,7 +27,6 @@ function check(btn)
 }
 function checkForWin()
 {
-    const buttons = document.getElementsByTagName(`button`);
     const buttonsText = [];
     for (btn of buttons) {
         buttonsText[buttonsText.length] = btn.innerText;
@@ -42,7 +44,16 @@ function checkForWin()
 function win() {
     isOver = true;
     if (draw) h3.innerText = `Draw`;
-    else if (player1Turn) h3.innerText = `Player2 Won`;
-    else h3.innerText = `Player1 Won`;
-    setTimeout(() => { location.reload(); }, 1000);
+    else if (player1Turn) {h3.innerText = `Player2 Won`; p2Win.innerText++}
+    else {h3.innerText = `Player1 Won`; p1Win.innerText++}
+    draw = false;
+    setTimeout(() => { reset(); }, 1000);
+}
+function reset() {
+    for (btn of buttons) {
+        btn.innerText = ``;
+    }
+    isOver = false;
+    if (player1Turn) h3.innerText = `Player1's Turn`;
+    else h3.innerText = `Player2's Turn`;
 }
